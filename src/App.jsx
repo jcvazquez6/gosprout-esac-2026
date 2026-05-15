@@ -25,22 +25,22 @@ const DEMO_URL = "https://meetings.hubspot.com/carlos587";
 
 // Since we can't embed the uploaded files directly as URLs in this artifact,
 // we fall back to the closest Unsplash match per slot — swap with your hosted files.
-const IMAGES = {
   // Slot → Your photo → Unsplash fallback
-  hero:         "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=85",  // USE: Image 5 (warehouse apprentices)
-  problem:      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1400&q=85", // USE: Image 1 (CNC training — subject on right)
-  whoSupport:   "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=85",  // USE: Image 14 (construction workers)
-  platform:     "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=85",    // USE: Image 4 (GoSprout dashboard screenshot)
-  conference:   "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=85", // USE: Image 3 (ESAC hall w/ GoSprout logo) ← best fit
-  caseUA:       "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",  // USE: Image 6 or 8 (aviation mechanic)
-  caseVolvo:    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",     // USE: Image 15 (auto mechanic w/ clipboard)
-  casePearce:   "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",  // USE: Image 13 (solar panel install)
-  caseFCC:      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80",  // USE: Image 11 (students/robotics — STEM)
-  caseRadiance: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",  // USE: Image 13 (solar)
-  caseNSBU:     "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",  // USE: Image 14 (construction/infrastructure)
-  caseMET:      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80",  // USE: Image 10 (young tech workers)
-  caseAPHC:     "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",  // USE: Image 7 (plumbing apprentice)
-  caseBY:       "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&q=80",  // USE: Image 9 (film/media production)
+const IMAGES = {
+  hero:         "/images/hero.jpg",
+  problem:      "/images/problem.png",
+  whoSupport:   "/images/who-support.png",
+  platform:     "/images/platform.png",
+  conference:   "/images/conference.jpg",
+  caseUA:       "/images/case-ua.png",
+  caseVolvo:    "/images/case-volvo.png",
+  casePearce:   "/images/case-pearce.png",
+  caseFCC:      "/images/case-fcc.png",
+  caseRadiance: "/images/case-radiance.png",
+  caseNSBU:     "/images/case-nsbu.png",
+  caseMET:      "/images/case-met.png",
+  caseAPHC:     "/images/case-aphc.png",
+  caseBY:       "/images/case-by.png",
 };
 
 // ─── ASSESSMENT QUESTIONS ─────────────────────────────────────────────────────
@@ -201,25 +201,14 @@ function FadeIn({ children, delay = 0, className = "" }) {
 
 function GoSproutLogo({ size = 32 }) {
   return (
-    <svg width={size * 2.8} height={size} viewBox="0 0 112 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 4C11.163 4 4 11.163 4 20C4 28.837 11.163 36 20 36C24.2 36 28 34.4 30.8 31.8L27.2 28.2C25.2 30 22.8 31.2 20 31.2C13.8 31.2 8.8 26.2 8.8 20C8.8 13.8 13.8 8.8 20 8.8C26.2 8.8 31.2 13.8 31.2 20V22H20V26.8H36V20C36 11.163 28.837 4 20 4Z" fill="white"/>
-      <rect x="20" y="16" width="16" height="7" rx="3.5" fill="#F28627"/>
-      <ellipse cx="20" cy="29" rx="4" ry="5" fill="#F5A623"/>
-      <text x="44" y="27" fontFamily="'Nunito Sans', sans-serif" fontWeight="800" fontSize="18" fill="white" letterSpacing="-0.3">GoSprout</text>
-    </svg>
+    <img src="/images/logo.png" alt="GoSprout" style={{ height: size, width: "auto" }} />
   );
 }
-
 function GoSproutIcon({ size = 32 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <path d="M20 2C10.059 2 2 10.059 2 20C2 29.941 10.059 38 20 38C24.6 38 28.8 36.2 31.9 33.3L27.9 29.3C25.7 31.3 22.9 32.6 20 32.6C13.1 32.6 7.4 26.9 7.4 20C7.4 13.1 13.1 7.4 20 7.4C26.9 7.4 32.6 13.1 32.6 20V22.2H20V27.2H37.8V20C37.8 10.059 29.941 2 20 2Z" fill="white"/>
-      <rect x="20" y="15.5" width="17.8" height="8" rx="4" fill="#F28627"/>
-      <ellipse cx="20" cy="30" rx="4.5" ry="5.5" fill="#F5A623"/>
-    </svg>
+    <img src="/images/icon.png" alt="GoSprout" style={{ height: size, width: "auto" }} />
   );
 }
-
 // ─── SCORE RESULT CONFIG ──────────────────────────────────────────────────────
 function getResult(score, max) {
   const pct = score / max;
