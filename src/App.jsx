@@ -242,14 +242,14 @@ function AssessmentModal({ onClose }) {
   const isContact = step === totalSteps + 1;
   const isResult = step === totalSteps + 2;
 
-  const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
+  const totalScore = Object.values(answers).reduce((a, b) => a + (b.score ?? b), 0);
   const maxScore = totalSteps * 4;
   const result = getResult(totalScore, maxScore);
 
   const canAdvance = isQuestion ? answers[qIndex] !== undefined : true;
 
-  const handleAnswer = (score) => {
-    setAnswers(prev => ({ ...prev, [qIndex]: score }));
+  const handleAnswer = (score, optIndex) => {
+    setAnswers(prev => ({ ...prev, [qIndex]: { score, optIndex } }));
   };
 
   const handleNext = async () => {
@@ -264,7 +264,7 @@ function AssessmentModal({ onClose }) {
       // Submit to HubSpot Forms API
       try {
         await fetch(
-          `https://api.hsforms.com/submissions/v3/integration/submit/22404677/7f1f27a9-73ee-489f-938b-8fbdff56b7ef`,
+          `https://api.hsforms.com/submissions/v3/integration/submit/22404677/esac-assessment-form`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -298,7 +298,7 @@ function AssessmentModal({ onClose }) {
   const catScores = ASSESSMENT_STEPS.map((s, i) => ({
     cat: s.category,
     icon: s.icon,
-    score: answers[i] || 0,
+    score: answers[i]?.score ?? 0,
     max: 4,
   }));
 
@@ -369,9 +369,9 @@ function AssessmentModal({ onClose }) {
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
                 {ASSESSMENT_STEPS[qIndex].options.map((opt, oi) => {
-                  const selected = answers[qIndex] === opt.score;
+                  const selected = answers[qIndex]?.optIndex === oi;
                   return (
-                    <button key={oi} onClick={() => handleAnswer(opt.score)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px", background: selected ? "rgba(242,134,39,.15)" : "rgba(255,255,255,.04)", border: `1.5px solid ${selected ? "#F28627" : "rgba(255,255,255,.08)"}`, borderRadius: 10, cursor: "pointer", textAlign: "left", transition: "all .15s", color: "#fff" }}>
+                    <button key={oi} onClick={() => handleAnswer(opt.score, oi)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px", background: selected ? "rgba(242,134,39,.15)" : "rgba(255,255,255,.04)", border: `1.5px solid ${selected ? "#F28627" : "rgba(255,255,255,.08)"}`, borderRadius: 10, cursor: "pointer", textAlign: "left", transition: "all .15s", color: "#fff" }}>
                       <div style={{ width: 20, height: 20, borderRadius: "50%", border: `2px solid ${selected ? "#F28627" : "rgba(255,255,255,.25)"}`, background: selected ? "#F28627" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all .15s" }}>
                         {selected && <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#fff" }} />}
                       </div>
