@@ -43,6 +43,103 @@ const IMAGES = {
   caseBY:       "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&q=80",  // USE: Image 9 (film/media production)
 };
 
+// ─── BOOTH CONTACT MODAL ─────────────────────────────────────────────────────
+function BoothModal({ onClose }) {
+  const [contact, setContact] = useState({ firstname: "", lastname: "", company: "", jobtitle: "", email: "" });
+  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+
+  const handleSubmit = async () => {
+    setStatus("submitting");
+    try {
+      const res = await fetch(
+        "https://api.hsforms.com/submissions/v3/integration/submit/22404677/7f1f27a9-73ee-489f-938b-8fbdff56b7ef",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fields: [
+              { name: "firstname", value: contact.firstname },
+              { name: "lastname", value: contact.lastname },
+              { name: "email", value: contact.email },
+              { name: "company", value: contact.company },
+              { name: "jobtitle", value: contact.jobtitle },
+              { name: "esac_assessment_result", value: "Booth Contact — ESAC 2026" },
+            ],
+            context: { pageUri: window.location.href, pageName: "ESAC 2026 Booth" },
+          }),
+        }
+      );
+      if (res.ok) setStatus("success");
+      else setStatus("error");
+    } catch (e) {
+      setStatus("error");
+    }
+  };
+
+  const canSubmit = contact.firstname && contact.lastname && contact.email;
+
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
+      <div onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(10,8,30,.85)", backdropFilter: "blur(8px)", cursor: "pointer" }} />
+      <div style={{ position: "relative", width: "100%", maxWidth: 480, background: "#1b1844", border: "1px solid rgba(255,255,255,.12)", borderRadius: 20, overflow: "hidden", boxShadow: "0 32px 80px rgba(0,0,0,.6)" }}>
+        {/* Header */}
+        <div style={{ background: "linear-gradient(135deg, rgba(242,134,39,.15), rgba(242,134,39,.05))", borderBottom: "1px solid rgba(255,255,255,.08)", padding: "28px 32px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+          <div>
+            <div style={{ fontSize: 11, color: "#F28627", fontWeight: 700, letterSpacing: ".1rem", textTransform: "uppercase", marginBottom: 6 }}>ESAC 2026 — GoSprout Booth</div>
+            <div style={{ fontWeight: 900, fontSize: 22, lineHeight: 1.2 }}>Nice to Meet You! 👋</div>
+            <div style={{ fontSize: 14, color: "rgba(255,255,255,.55)", marginTop: 6 }}>Leave your info and we'll follow up after the conference.</div>
+          </div>
+          <button onClick={onClose} style={{ background: "rgba(255,255,255,.08)", border: "none", color: "rgba(255,255,255,.6)", width: 32, height: 32, borderRadius: "50%", cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginLeft: 16 }}>✕</button>
+        </div>
+
+        <div style={{ padding: "28px 32px 32px" }}>
+          {status === "success" ? (
+            <div style={{ textAlign: "center", padding: "20px 0" }}>
+              <div style={{ fontSize: 48, marginBottom: 16 }}>🎉</div>
+              <div style={{ fontWeight: 900, fontSize: 22, marginBottom: 10 }}>You're all set!</div>
+              <div style={{ fontSize: 15, color: "rgba(255,255,255,.6)", lineHeight: 1.6, marginBottom: 28 }}>We'll be in touch after ESAC. In the meantime, feel free to explore the platform or take the Operations Assessment.</div>
+              <button className="btn-primary" style={{ width: "100%", textAlign: "center", fontSize: 15, padding: "16px" }} onClick={onClose}>Done</button>
+            </div>
+          ) : (
+            <>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+                {[
+                  { key: "firstname", label: "First Name", placeholder: "Jane", type: "text" },
+                  { key: "lastname", label: "Last Name", placeholder: "Smith", type: "text" },
+                ].map(f => (
+                  <div key={f.key}>
+                    <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: ".05rem", marginBottom: 6 }}>{f.label}</label>
+                    <input type={f.type} placeholder={f.placeholder} value={contact[f.key]} onChange={e => setContact(p => ({ ...p, [f.key]: e.target.value }))} style={{ width: "100%", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 8, padding: "12px 14px", color: "#fff", fontSize: 14, fontFamily: "'Nunito Sans',sans-serif", outline: "none" }} />
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
+                {[
+                  { key: "company", label: "Organization", placeholder: "Frederick Community College", type: "text" },
+                  { key: "jobtitle", label: "Your Role", placeholder: "Apprenticeship Coordinator", type: "text" },
+                  { key: "email", label: "Work Email", placeholder: "jane@college.edu", type: "email" },
+                ].map(f => (
+                  <div key={f.key}>
+                    <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: ".05rem", marginBottom: 6 }}>{f.label}</label>
+                    <input type={f.type} placeholder={f.placeholder} value={contact[f.key]} onChange={e => setContact(p => ({ ...p, [f.key]: e.target.value }))} style={{ width: "100%", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 8, padding: "12px 14px", color: "#fff", fontSize: 14, fontFamily: "'Nunito Sans',sans-serif", outline: "none" }} />
+                  </div>
+                ))}
+              </div>
+              {status === "error" && (
+                <div style={{ background: "rgba(239,68,68,.1)", border: "1px solid rgba(239,68,68,.3)", borderRadius: 8, padding: "12px 14px", marginBottom: 14, fontSize: 13, color: "#ef4444" }}>Something went wrong. Please try again.</div>
+              )}
+              <button onClick={handleSubmit} disabled={!canSubmit || status === "submitting"} style={{ width: "100%", background: canSubmit ? "#F28627" : "rgba(255,255,255,.1)", border: "none", color: canSubmit ? "#fff" : "rgba(255,255,255,.3)", borderRadius: 8, padding: "16px", cursor: canSubmit ? "pointer" : "not-allowed", fontSize: 15, fontFamily: "'Montserrat',sans-serif", fontWeight: 700, transition: "all .2s" }}>
+                {status === "submitting" ? "Submitting..." : "Nice to Meet You →"}
+              </button>
+              <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,.3)", textAlign: "center" }}>We don't share your information. No spam, ever.</div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── ASSESSMENT QUESTIONS ─────────────────────────────────────────────────────
 const ASSESSMENT_STEPS = [
   {
@@ -481,6 +578,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showAssessment, setShowAssessment] = useState(false);
+  const [showBooth, setShowBooth] = useState(false);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 40);
@@ -490,9 +588,9 @@ export default function App() {
 
   // Prevent body scroll when modal open
   useEffect(() => {
-    document.body.style.overflow = showAssessment ? "hidden" : "";
+    document.body.style.overflow = (showAssessment || showBooth) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [showAssessment]);
+  }, [showAssessment, showBooth]);
 
   const scrollTo = (id) => {
     setMobileOpen(false);
@@ -501,6 +599,7 @@ export default function App() {
 
   const openDemo = () => window.open(DEMO_URL, "_blank");
   const openAssessment = () => setShowAssessment(true);
+  const openBooth = () => setShowBooth(true);
 
   return (
     <div style={{ fontFamily: "'Nunito Sans', sans-serif", background: "#262261", color: "#fff", overflowX: "hidden" }}>
@@ -534,6 +633,8 @@ export default function App() {
 
       {/* ASSESSMENT MODAL */}
       {showAssessment && <AssessmentModal onClose={() => setShowAssessment(false)} />}
+      {/* BOOTH MODAL */}
+      {showBooth && <BoothModal onClose={() => setShowBooth(false)} />}
 
       {/* NAV */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "0 24px", background: scrolled ? "rgba(27,24,68,.97)" : "transparent", backdropFilter: scrolled ? "blur(16px)" : "none", borderBottom: scrolled ? "1px solid rgba(255,255,255,.08)" : "none", transition: "all .3s" }}>
@@ -547,6 +648,7 @@ export default function App() {
               <button key={l.label} onClick={() => scrollTo(l.href)} style={{ background: "none", border: "none", color: "rgba(255,255,255,.75)", fontSize: 13, fontFamily: "'Montserrat',sans-serif", fontWeight: 600, cursor: "pointer", transition: "color .2s" }} onMouseEnter={e => e.target.style.color="#fff"} onMouseLeave={e => e.target.style.color="rgba(255,255,255,.75)"}>{l.label}</button>
             ))}
             <button className="btn-primary" style={{ padding: "10px 18px", fontSize: 13 }} onClick={openDemo}>Book a Demo</button>
+            <button onClick={openBooth} style={{ background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.2)", borderRadius: 8, padding: "10px 18px", color: "#fff", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>👋 Meet Us at ESAC</button>
           </div>
           <button onClick={() => setMobileOpen(!mobileOpen)} style={{ background: "none", border: "none", color: "#fff", fontSize: 22, cursor: "pointer", display: "none" }} className="mobile-menu-btn">☰</button>
         </div>
