@@ -241,9 +241,32 @@ function AssessmentModal({ onClose }) {
     setAnswers(prev => ({ ...prev, [qIndex]: score }));
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isContact) {
       setSubmitted(true);
+      try {
+        await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/22404677/7f1f27a9-73ee-489f-938b-8fbdff56b7ef`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              fields: [
+                { name: "firstname", value: contact.name.split(" ")[0] },
+                { name: "lastname", value: contact.name.split(" ").slice(1).join(" ") || "" },
+                { name: "email", value: contact.email },
+                { name: "company", value: contact.org },
+                { name: "jobtitle", value: contact.role },
+                { name: "esac_assessment_total_score", value: String(totalScore) },
+                { name: "esac_assessment_result", value: result.label },
+              ],
+              context: { pageUri: window.location.href, pageName: "ESAC 2026 Microsite" },
+            }),
+          }
+        );
+      } catch (e) {
+        console.error("HubSpot submission error:", e);
+      }
       setStep(s => s + 1);
     } else {
       setStep(s => s + 1);
