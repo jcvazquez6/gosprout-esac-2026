@@ -26,21 +26,20 @@ const DEMO_URL = "https://meetings.hubspot.com/carlos587";
 // Since we can't embed the uploaded files directly as URLs in this artifact,
 // we fall back to the closest Unsplash match per slot — swap with your hosted files.
 const IMAGES = {
-  // Slot → Your photo → Unsplash fallback
-  hero:         "/images/hero.jpg",  // USE: Image 5 (warehouse apprentices)
-  problem:      "/images/problem.png", // USE: Image 1 (CNC training — subject on right)
-  whoSupport:   "/images/who-support.png",  // USE: Image 14 (construction workers)
-  platform:     "/images/platform.png",    // USE: Image 4 (GoSprout dashboard screenshot)
-  conference:   "/images/conference.jpg", // USE: Image 3 (ESAC hall w/ GoSprout logo) ← best fit
-  caseUA:       "/images/case-ua.png",  // USE: Image 6 or 8 (aviation mechanic)
-  caseVolvo:    "/images/case-volvo.png",     // USE: Image 15 (auto mechanic w/ clipboard)
-  casePearce:   "/images/case-pearce.png",  // USE: Image 13 (solar panel install)
-  caseFCC:      "/images/case-fcc.png",  // USE: Image 11 (students/robotics — STEM)
-  caseRadiance: "/images/case-radiance.png",  // USE: Image 13 (solar)
-  caseNSBU:     "/images/case-nsbu.png",  // USE: Image 14 (construction/infrastructure)
-  caseMET:      "/images/case-met.png",  // USE: Image 10 (young tech workers)
-  caseAPHC:     "/images/case-aphc.png",  // USE: Image 7 (plumbing apprentice)
-  caseBY:       "/images/case-by.png",  // USE: Image 9 (film/media production)
+  hero:         "/images/hero.jpg",
+  problem:      "/images/problem.png",
+  whoSupport:   "/images/who-support.png",
+  platform:     "/images/platform.png",
+  conference:   "/images/conference.jpg",
+  caseUA:       "/images/case-ua.png",
+  caseVolvo:    "/images/case-volvo.png",
+  casePearce:   "/images/case-pearce.png",
+  caseFCC:      "/images/case-fcc.png",
+  caseRadiance: "/images/case-radiance.png",
+  caseNSBU:     "/images/case-nsbu.png",
+  caseMET:      "/images/case-met.png",
+  caseAPHC:     "/images/case-aphc.png",
+  caseBY:       "/images/case-by.png",
 };
 
 // ─── BOOTH CONTACT MODAL ─────────────────────────────────────────────────────
@@ -650,6 +649,7 @@ export default function App() {
               <button key={l.label} onClick={() => scrollTo(l.href)} style={{ display: "block", background: "none", border: "none", color: "rgba(255,255,255,.8)", fontSize: 15, fontFamily: "'Montserrat',sans-serif", fontWeight: 600, cursor: "pointer", padding: "10px 0", width: "100%", textAlign: "left" }}>{l.label}</button>
             ))}
             <button className="btn-primary" style={{ marginTop: 12, width: "100%" }} onClick={openDemo}>Book a Demo</button>
+            <button onClick={openBooth} style={{ marginTop: 10, width: "100%", background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.2)", borderRadius: 8, padding: "14px", color: "#fff", fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: 14, cursor: "pointer" }}>👋 Meet Us at ESAC</button>
           </div>
         )}
       </nav>
