@@ -27,20 +27,20 @@ const DEMO_URL = "https://meetings.hubspot.com/carlos587";
 // we fall back to the closest Unsplash match per slot — swap with your hosted files.
 const IMAGES = {
   // Slot → Your photo → Unsplash fallback
-  hero:         "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=85",  // USE: Image 5 (warehouse apprentices)
-  problem:      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1400&q=85", // USE: Image 1 (CNC training — subject on right)
-  whoSupport:   "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=85",  // USE: Image 14 (construction workers)
-  platform:     "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=85",    // USE: Image 4 (GoSprout dashboard screenshot)
-  conference:   "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=85", // USE: Image 3 (ESAC hall w/ GoSprout logo) ← best fit
-  caseUA:       "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",  // USE: Image 6 or 8 (aviation mechanic)
-  caseVolvo:    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",     // USE: Image 15 (auto mechanic w/ clipboard)
-  casePearce:   "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",  // USE: Image 13 (solar panel install)
-  caseFCC:      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80",  // USE: Image 11 (students/robotics — STEM)
-  caseRadiance: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80",  // USE: Image 13 (solar)
-  caseNSBU:     "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",  // USE: Image 14 (construction/infrastructure)
-  caseMET:      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80",  // USE: Image 10 (young tech workers)
-  caseAPHC:     "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",  // USE: Image 7 (plumbing apprentice)
-  caseBY:       "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&q=80",  // USE: Image 9 (film/media production)
+  hero:         "/images/hero.jpg",  // USE: Image 5 (warehouse apprentices)
+  problem:      "/images/problem.png", // USE: Image 1 (CNC training — subject on right)
+  whoSupport:   "/images/who-support.png",  // USE: Image 14 (construction workers)
+  platform:     "/images/platform.png",    // USE: Image 4 (GoSprout dashboard screenshot)
+  conference:   "/images/conference.jpg", // USE: Image 3 (ESAC hall w/ GoSprout logo) ← best fit
+  caseUA:       "/images/case-ua.png",  // USE: Image 6 or 8 (aviation mechanic)
+  caseVolvo:    "/images/case-volvo.png",     // USE: Image 15 (auto mechanic w/ clipboard)
+  casePearce:   "/images/case-pearce.png",  // USE: Image 13 (solar panel install)
+  caseFCC:      "/images/case-fcc.png",  // USE: Image 11 (students/robotics — STEM)
+  caseRadiance: "/images/case-radiance.png",  // USE: Image 13 (solar)
+  caseNSBU:     "/images/case-nsbu.png",  // USE: Image 14 (construction/infrastructure)
+  caseMET:      "/images/case-met.png",  // USE: Image 10 (young tech workers)
+  caseAPHC:     "/images/case-aphc.png",  // USE: Image 7 (plumbing apprentice)
+  caseBY:       "/images/case-by.png",  // USE: Image 9 (film/media production)
 };
 
 // ─── BOOTH CONTACT MODAL ─────────────────────────────────────────────────────
