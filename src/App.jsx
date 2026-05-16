@@ -298,22 +298,13 @@ function FadeIn({ children, delay = 0, className = "" }) {
 
 function GoSproutLogo({ size = 32 }) {
   return (
-    <svg width={size * 2.8} height={size} viewBox="0 0 112 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 4C11.163 4 4 11.163 4 20C4 28.837 11.163 36 20 36C24.2 36 28 34.4 30.8 31.8L27.2 28.2C25.2 30 22.8 31.2 20 31.2C13.8 31.2 8.8 26.2 8.8 20C8.8 13.8 13.8 8.8 20 8.8C26.2 8.8 31.2 13.8 31.2 20V22H20V26.8H36V20C36 11.163 28.837 4 20 4Z" fill="white"/>
-      <rect x="20" y="16" width="16" height="7" rx="3.5" fill="#F28627"/>
-      <ellipse cx="20" cy="29" rx="4" ry="5" fill="#F5A623"/>
-      <text x="44" y="27" fontFamily="'Nunito Sans', sans-serif" fontWeight="800" fontSize="18" fill="white" letterSpacing="-0.3">GoSprout</text>
-    </svg>
+    <img src="/images/logo.png" alt="GoSprout" style={{ height: size, width: "auto" }} />
   );
 }
 
 function GoSproutIcon({ size = 32 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <path d="M20 2C10.059 2 2 10.059 2 20C2 29.941 10.059 38 20 38C24.6 38 28.8 36.2 31.9 33.3L27.9 29.3C25.7 31.3 22.9 32.6 20 32.6C13.1 32.6 7.4 26.9 7.4 20C7.4 13.1 13.1 7.4 20 7.4C26.9 7.4 32.6 13.1 32.6 20V22.2H20V27.2H37.8V20C37.8 10.059 29.941 2 20 2Z" fill="white"/>
-      <rect x="20" y="15.5" width="17.8" height="8" rx="4" fill="#F28627"/>
-      <ellipse cx="20" cy="30" rx="4.5" ry="5.5" fill="#F5A623"/>
-    </svg>
+    <img src="/images/icon.png" alt="GoSprout" style={{ height: size, width: "auto" }} />
   );
 }
 
